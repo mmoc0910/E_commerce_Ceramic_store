@@ -7,7 +7,7 @@ type BreadcrumbProps = { items: { title: string; url?: string }[] };
 
 const Breadcrumb: FC<BreadcrumbProps> = ({ items }) => {
   return (
-    <div className="flex items-center gap-2 py-5 text-base flex-wrap">
+    <div className="flex items-center gap-1 py-5 text-base flex-wrap">
       {items.map(
         (item, index) => (
           <>
@@ -29,7 +29,7 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ items }) => {
                 {item.title}
               </span>
             )}
-            {index !== items.length - 1 ? <span key={uuidv4()}>/</span> : null}
+            {index !== items.length - 1 ? <span key={uuidv4()} className="text-gray-400">/</span> : null}
           </>
         )
         // return ;
