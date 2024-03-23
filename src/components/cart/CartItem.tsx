@@ -34,26 +34,26 @@ const CartItem: FC<CartItemType> = React.memo(({ cart }) => {
   }, [dispatch, product, productId]);
   const handleRemoveCart = (_id: string) => dispatch(removeProductToCart(_id));
   return (
-    <div className="flex items-stretch gap-8 select-none">
-      <Link to={`/product/${productId}`}>
+    <div className="flex items-stretch gap-3 md:gap-5 xl:gap-8 select-none">
+      <Link to={`/product/${productId}`} className="shrink-0">
         <img
           src={product ? JSON.parse(product.img)[0] : image}
-          className="w-[140px] aspect-square object-cover rounded-ss-3xl rounded-ee-3xl"
+          className="w-[110px] md:w-[140px] aspect-square object-cover rounded-ss-3xl rounded-ee-3xl"
         ></img>
       </Link>
       <div className="flex flex-col justify-between flex-1">
         <div className="">
           <Link
             to={`/product/${productId}`}
-            className="w-3/4 hover:underline hover:decoration-intuitive"
+            className="xl:w-3/4 hover:underline hover:decoration-intuitive line-clamp-1 md:line-clamp-2"
           >
             {product?.name || name}
           </Link>
           {/* <div className="w-5 h-5 mt-2 rounded-full bg-simple" /> */}
         </div>
         <div className="">
-          <p className="mb-2">Số lượng</p>
-          <div className="flex items-center gap-2">
+          <p className="mb-2">Số lượng:</p>
+          <div className="flex items-center gap-2 mb-2 xl:mb-0">
             <Quantity
               size="small"
               amount={amount}
@@ -73,16 +73,22 @@ const CartItem: FC<CartItemType> = React.memo(({ cart }) => {
               x {product?.price ? VND_FORMAT(product.price) : VND_FORMAT(price)}
             </p>
           </div>
+          <p className="font-semibold block xl:hidden">
+            ={" "}
+            {product?.price
+              ? VND_FORMAT(product.price * amount)
+              : VND_FORMAT(price * amount)}
+          </p>
         </div>
       </div>
-      <div className="flex flex-col items-end justify-between">
-        <p className="font-semibold">
+      <div className="flex flex-col items-end justify-end md:justify-between">
+        <p className="font-semibold hidden xl:block">
           {product?.price
             ? VND_FORMAT(product.price * amount)
             : VND_FORMAT(price * amount)}
         </p>
         <span
-          className="cursor-pointer hover:text-error transition-all duration-200"
+          className="cursor-pointer hover:text-error transition-all duration-200 pb-2"
           onClick={() => handleRemoveCart(productId)}
         >
           <TrashXML />

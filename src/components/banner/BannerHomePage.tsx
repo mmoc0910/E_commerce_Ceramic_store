@@ -58,12 +58,12 @@ const BannerHomePage = () => {
       >
         <SwiperSlide>
           <div className="relative">
-            <img src={banner1} className="w-full h-[700px] object-cover" />
+            <img src={banner1} className="w-full h-[500px] md:h-[650px] lg:h-[750px] xl:h-[700px] object-cover" />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="relative">
-            <img src={banner2} className="w-full h-[700px] object-cover" />
+            <img src={banner2} className="w-full h-[500px] md:h-[650px] lg:h-[750px] xl:h-[700px] object-cover" />
           </div>
         </SwiperSlide>
         {/* {images.map((item) => (

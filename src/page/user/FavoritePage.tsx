@@ -11,7 +11,7 @@ const FavoritePage = () => {
     <div className="container pt-10 pb-20 space-y-10">
       <Heading>Sản phẩm yêu thích</Heading>
       {favoriteProducts.length > 0 ? (
-        <div className="grid grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 gap-y-8 xl:gap-8">
           {favoriteProducts.map((item) => (
             <ProductItem key={uuidv4()} productId={item} />
           ))}

@@ -20,9 +20,9 @@ const Recomendation = () => {
   }, []);
   if (listProduct.length > 0)
     return (
-      <div className="pt-20 pb-0 space-y-10">
-        <Heading>Recomendation</Heading>
-        <div className="grid grid-cols-5 gap-8">
+      <div className="pt-14 md:pt-20 pb-0 space-y-10">
+        <Heading>Gợi ý hôm nay</Heading>
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-8 xl:gap-8">
           {listProduct.map((item) => (
             <ProductItem key={uuidv4()} product={item} />
           ))}
@@ -31,7 +31,7 @@ const Recomendation = () => {
           to={""}
           className="block text-center underline uppercase decoration-black"
         >
-          view all products
+          Xem tất cả sản phẩm
         </Link>
       </div>
     );

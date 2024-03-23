@@ -1,18 +1,18 @@
-import { Progress, Slider } from "antd";
+// import { Slider } from "antd";
 import Breadcrumb from "../../components/common/Breadcrumb";
-import Collapse from "../../components/common/Collapse";
+// import Collapse fr/om "../../components/common/Collapse";
 import Heading from "../../components/common/Heading";
 import ProductItem from "../../components/product/ProductItem";
-import Checkbox from "../../components/common/CheckBox";
-import CheckBoxColor from "../../components/common/CheckBoxColor";
+// import Checkbox from "../../components/common/CheckBox";
+// import CheckBoxColor from "../../components/common/CheckBoxColor";
 import { useEffect, useState } from "react";
 import { CategoryType, ProductType } from "../../components/type";
 import { api } from "../../api";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { VND_FORMAT } from "../../utils/formatPrice";
+// import { VND_FORMAT } from "../../utils/formatPrice";
 
-const formatter = (value?: number) => (value ? `${VND_FORMAT(value)}` : null);
+// const formatter = (value?: number) => (value ? `${VND_FORMAT(value)}` : null);
 const CatalogDetailPage = () => {
   const { catalogId } = useParams();
   const [category, setCategory] = useState<CategoryType>();
@@ -34,16 +34,29 @@ const CatalogDetailPage = () => {
       <div className="container pb-20">
         <Breadcrumb
           items={[
-            { title: "Home", url: "/" },
-            { title: "Catalog", url: "/catalog" },
+            { title: "Trang chủ", url: "/" },
+            { title: "Gian hàng", url: "/catalog" },
             { title: name },
           ]}
         />
-        <div className="pt-10 space-y-24">
+        <div className="pt-10 space-y-10 md:space-y-24">
           <Heading>{name}</Heading>
           <div className="">
-            <div className="grid grid-cols-5 gap-8">
-              <div className="col-span-1">
+            <div className="col-span-10 md:col-span-7 lg:col-span-4">
+              {products.length > 0 ? (
+                <div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 gap-y-8 xl:gap-8">
+                    {products.map((item) => (
+                      <ProductItem key={uuidv4()} product={item} />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <p>Chưa có sản phẩm nào trong {name}</p>
+              )}
+            </div>
+            {/* <div className="grid grid-cols-10 lg:grid-cols-5 gap-8">
+              <div className="col-span-3 lg:col-span-1 hidden md:block">
                 <p className="pb-5 font-medium text-center uppercase">Filter</p>
                 <div className="space-y-2">
                   <Collapse title="Price">
@@ -117,10 +130,10 @@ const CatalogDetailPage = () => {
                   </p>
                 </div>
               </div>
-              <div className="col-span-4">
+              <div className="col-span-10 md:col-span-7 lg:col-span-4">
                 {products.length > 0 ? (
                   <div>
-                    <div className="grid grid-cols-4 gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
                       {products.map((item) => (
                         <ProductItem key={uuidv4()} product={item} />
                       ))}
@@ -147,7 +160,7 @@ const CatalogDetailPage = () => {
                   <p>Chưa có sản phẩm nào trong {name}</p>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

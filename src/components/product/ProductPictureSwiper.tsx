@@ -45,7 +45,7 @@ const ProductPictureSwiper: React.FC<ProductPictureSwiper> = ({ images }) => {
         {images &&
           images.map((item) => (
             <SwiperSlide key={uuidv4()}>
-              <div className="relative w-full h-0 pb-[75%] cursor-pointer select-none">
+              <div className="relative w-full h-0 pb-[80%] lg:pb-[75%] cursor-pointer select-none">
                 <img
                   src={item}
                   alt=""

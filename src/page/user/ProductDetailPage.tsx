@@ -5,7 +5,7 @@ import Recomendation from "../../components/home/Recomendation";
 import HeartXML from "../../components/icons/HeartXML";
 import ProductPictureSwiper from "../../components/product/ProductPictureSwiper";
 import { useEffect, useState } from "react";
-import { ProductType } from "../../components/type";
+import { CategoryType, ProductType } from "../../components/type";
 import { api } from "../../api";
 import { VND_FORMAT } from "../../utils/formatPrice";
 import parse from "html-react-parser";
@@ -21,12 +21,23 @@ const ProductDetailPage = () => {
   const handleAddFavorite = (_id: string) => dispatch(addFavorite(_id));
   const handleRemoveFavorite = (_id: string) => dispatch(removeFavorite(_id));
   const [product, setProduct] = useState<ProductType>();
+  const [productCategory, setProductCategory] = useState<CategoryType>();
   const [amount, setAmount] = useState<number>(1);
+
   useEffect(() => {
     (async () => {
       try {
-        const result = await api.get<ProductType>(`/product/${productId}`);
-        setProduct(result.data);
+        const [{ data: productDetailResult }, { data: categoriesResult }] =
+          await Promise.all([
+            api.get<ProductType>(`/product/${productId}`),
+            api.get<CategoryType[]>(`/category`),
+          ]);
+        setProduct(productDetailResult);
+        setProductCategory(
+          categoriesResult.find((item) =>
+            item.products.some((i) => i._id === productId)
+          )
+        );
       } catch (error) {
         console.log(error);
       }
@@ -42,20 +53,23 @@ const ProductDetailPage = () => {
       <div className="container pb-20">
         <Breadcrumb
           items={[
-            { title: "Home", url: "/" },
-            { title: "Catalog", url: "/catalog" },
-            { title: "cups", url: "/catalog/cups" },
+            { title: "Trang chủ", url: "/" },
+            { title: "Gian hàng", url: "/catalog" },
+            {
+              title: productCategory?.name || "",
+              url: `/catalog/${productCategory?._id}`,
+            },
             { title: name },
           ]}
         />
         <div className="grid grid-cols-10 gap-10 pt-8">
-          <div className="col-span-6">
+          <div className="col-span-10 md:col-span-6">
             <ProductPictureSwiper images={images} />
           </div>
-          <div className="w-3/4 col-span-4 space-y-4 select-none">
+          <div className="xl:w-3/4 col-span-10 md:col-span-4 space-y-4 select-none">
             <h1 className="text-2xl">{name}</h1>
             <p className="text-2xl">{VND_FORMAT(price)}</p>
-            <div className="grid w-3/4 grid-cols-2 gap-y-10">
+            <div className="grid lg:w-3/4 grid-cols-2 gap-y-10">
               <div className="self-center col-span-1 text-sm font-medium uppercase">
                 Số lượng
               </div>
@@ -64,14 +78,14 @@ const ProductDetailPage = () => {
                 onReduce={(value) => setAmount(value)}
                 onIncrease={(value) => setAmount(value)}
               />
-              <div className="self-center col-span-1 text-sm font-medium uppercase">
+              {/* <div className="self-center col-span-1 text-sm font-medium uppercase">
                 Màu sắc
               </div>
               <div className="">
                 <div className="w-5 h-5 rounded-full bg-simple" />
-              </div>
+              </div> */}
             </div>
-            <div className="flex items-center w-3/4 gap-5 pt-5">
+            <div className="flex items-center lg:w-3/4 gap-5 pt-5">
               <button
                 onClick={() =>
                   handleAddProductToCart({
@@ -97,70 +111,16 @@ const ProductDetailPage = () => {
             </div>
             <div className="pt-5">{description}</div>
           </div>
-          <div className="col-span-6">
-            <div className="flex items-center gap-20 py-10">
+          <div className="col-span-10 lg:col-span-6">
+            <div className="flex items-center gap-10 md:gap-20 py-5 md:py-10">
               <div className="underline uppercase text-lg font-medium decoration-intuitive">
                 Chi tiết sản phẩm
               </div>
-              <div className="uppercase text-lg font-medium decoration-intuitive">
+              {/* <div className="uppercase text-lg font-medium decoration-intuitive">
                 Vận chuyển và hoàn trả
-              </div>
-            </div>
-            <div className="product-content">
-              {parse(content)}
-              {/* <div className="space-y-3">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Quaerat repudiandae nulla voluptas quidem dolor libero saepe
-                  error dolore incidunt provident quibusdam nihil porro,
-                  deserunt reprehenderit sint. Neque ratione placeat harum?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-                  omnis possimus repudiandae quibusdam, quas placeat unde
-                  accusantium impedit vero quae, beatae asperiores, consequatur
-                  doloribus sed laborum alias architecto illum quasi?
-                </p>
-              </div>
-              <div className="w-3/4 mt-5 space-y-3">
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Weight</div>
-                  <div className="flex-1 font-medium">400 g</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Brabds</div>
-                  <div className="flex-1 font-medium">Marin</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Material</div>
-                  <div className="flex-1 font-medium">Việt Nam</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Diameter</div>
-                  <div className="flex-1 font-medium">11.5 cm</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Weight</div>
-                  <div className="flex-1 font-medium">400 g</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Weight</div>
-                  <div className="flex-1 font-medium">400 g</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Weight</div>
-                  <div className="flex-1 font-medium">400 g</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Weight</div>
-                  <div className="flex-1 font-medium">400 g</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-1 font-medium">Weight</div>
-                  <div className="flex-1 font-medium">400 g</div>
-                </div>
               </div> */}
             </div>
+            <div className="product-content">{parse(content)}</div>
           </div>
         </div>
         <Recomendation />

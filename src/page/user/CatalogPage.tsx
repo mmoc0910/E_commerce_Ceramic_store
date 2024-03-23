@@ -5,7 +5,7 @@ import Recomendation from "../../components/home/Recomendation";
 const CatalogPage = () => {
   return (
     <div className="container pb-20">
-      <Breadcrumb items={[{ title: "Home", url: "/" }, { title: "Catalog" }]} />
+      <Breadcrumb items={[{ title: "Trang chủ", url: "/" }, { title: "Gian hàng" }]} />
       <CatalogProducts />
       <Recomendation />
     </div>

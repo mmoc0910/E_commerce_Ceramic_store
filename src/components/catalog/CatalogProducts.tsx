@@ -21,7 +21,7 @@ const CatalogProducts = () => {
     <div className="pt-5 space-y-10">
       <Heading>Products</Heading>
       {categories.length > 0 ? (
-        <div className="grid grid-cols-3 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10">
           {categories.map((item) => (
             <Link
               key={uuidv4()}
@@ -30,9 +30,9 @@ const CatalogProducts = () => {
             >
               <img
                 src={item.img}
-                className="object-cover w-full aspect-square rounded-ss-[3rem] rounded-ee-[3rem]"
+                className="object-cover w-full aspect-square rounded-ss-[2rem] rounded-ee-[2rem] md:rounded-ss-[3rem] mdrounded-ee-[3rem]"
               />
-              <p className="uppercase">{item.name}</p>
+              <p className="uppercase text-center">{item.name}</p>
             </Link>
           ))}
         </div>

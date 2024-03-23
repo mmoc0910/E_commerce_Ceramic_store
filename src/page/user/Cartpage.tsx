@@ -83,12 +83,12 @@ const Cartpage = () => {
     <div className="container pt-10 pb-20 space-y-10">
       <Heading>Giỏ hàng</Heading>
       {cart.length > 0 ? (
-        <div className="grid grid-cols-10">
-          <div className="col-span-6 pr-20 border-r border-r-[#ccc] space-y-12 py-5">
+        <div className="grid grid-cols-1 md:grid-cols-10">
+          <div className="col-span-6 md:pr-5 lg:pr-10 xl:pr-20 md:border-r border-r-[#ccc] space-y-7 md:space-y-10 xl::space-y-12 py-5">
             {cart.length > 0 &&
               cart.map((item) => <CartItem key={uuidv4()} cart={item} />)}
           </div>
-          <div className="col-span-4 pl-20 py-5 space-y-5">
+          <div className="col-span-4 md:pl-5 lg:pl-10 xl:pl-20 py-5 space-y-5">
             <div className="grid w-3/4 grid-cols-2 gap-y-3">
               <div className="uppercase text-lg">Tổng tiền: </div>
               <div className="font-medium text-end text-lg">
