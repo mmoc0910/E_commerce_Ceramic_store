@@ -7,7 +7,7 @@ type BreadcrumbProps = { items: { title: string; url?: string }[] };
 
 const Breadcrumb: FC<BreadcrumbProps> = ({ items }) => {
   return (
-    <div className="flex items-center gap-1 py-5 text-base flex-wrap">
+    <div className="flex items-center gap-1 py-5 text-sm md:text-base flex-wrap">
       {items.map(
         (item, index) => (
           <>
