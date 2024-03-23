@@ -62,7 +62,7 @@ const ProductDetailPage = () => {
             { title: name },
           ]}
         />
-        <div className="grid grid-cols-10 gap-10 pt-8">
+        <div className="grid grid-cols-10 gap-10 pt-5 md:pt-8">
           <div className="col-span-10 md:col-span-6">
             <ProductPictureSwiper images={images} />
           </div>
