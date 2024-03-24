@@ -67,7 +67,7 @@ const CategoryPage = () => {
           Thêm mới
         </Button>
       </div>
-      <div className="grid grid-cols-4 gap-x-10 gap-y-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-10 md:gap-y-20">
         {categories.length > 0 &&
           categories.map((category) => (
             <div className="space-y-3">
@@ -82,16 +82,16 @@ const CategoryPage = () => {
                 />
                 <p className="uppercase">{category.name}</p>
               </Link>
-              <div className="flex items-center gap-5">
+              <div className="flex flex-col md:flex-row items-center gap-5">
                 <Link
                   to={`/admin/category/edit/${category._id}`}
-                  className="text-aesthetic text-base uppercase bg-simple rounded-ss-2xl rounded-ee-2xl py-3 flex-1 font-light flex items-center justify-center"
+                  className="text-aesthetic text-base uppercase bg-simple rounded-ss-2xl rounded-ee-2xl py-3 w-full md:flex-1 font-light flex items-center justify-center"
                 >
                   Chỉnh sửa
                 </Link>
                 <button
                   onClick={() => handleRemoveCategory(category)}
-                  className="text-aesthetic text-base uppercase bg-simple rounded-ss-2xl rounded-ee-2xl py-3 flex-1 font-light flex items-center justify-center"
+                  className="text-aesthetic text-base uppercase bg-simple rounded-ss-2xl rounded-ee-2xl py-3 w-full md:flex-1 font-light flex items-center justify-center"
                 >
                   Xóa
                 </button>
